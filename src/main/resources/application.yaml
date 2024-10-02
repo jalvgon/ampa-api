@@ -1,0 +1,66 @@
+server:
+   port: 8022
+   cors:
+    origins: '*'
+   servlet:
+      context-path: /
+security:
+   jwt:
+      expiration-minutes: 30
+      secret-key: UmFxdWV0YUZlYmUyMDI0UGFyYUVuY3JpcHRhckNsYXZlc2RlbGFBcGxpY2FjaW9u      
+spring:   
+   main:
+      allow-bean-definition-overriding: true
+   profiles:
+      active: '@spring.profiles.active@'
+   datasource:
+      url: jdbc:mariadb://localhost:3306/ampadb?serverTimezone=Europe/Madrid&zeroDateTimeBehavior=convertToNull      
+      username: root
+      password: ENC(QFaMBM+XNj8GDSsRZ/Eehw==)
+      #password: admin
+      driver-class-name: org.mariadb.jdbc.Driver
+      #defer-datasource-initialization: true
+   sql:
+      init:
+         #mode: 
+   jpa:
+      show-sql: true
+      properties:
+         hibernate:
+            format_sql: true
+      hibernate:
+         #ddl-auto: update
+         naming:
+            implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+            physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      database-platform: org.hibernate.dialect.MariaDBDialect      
+               
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: /api-docs
+springdoc:
+   api-docs:
+      enabled: true
+   swagger-ui:
+      enabled: true
+   packagesToScan: com.ampa.controllers,com.ampa.models
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    providerName: SunJCE
+    password: dpisas
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+logging:
+   level:
+      org:
+         hibernate:
+            orm:
+               jdbc:
+                  bind: TRACE
+            SQL: DEBUG
+            type:
+               descriptor:
+                  sql:
+                     BasicBinder:   TRACE   
